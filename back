@@ -1,0 +1,13 @@
+
+
+1) Define 4 simple pytest test cases
+2) Run Pytest test cases in a distributed environment, using selenium-server jar, i.e we will create
+a grid using selenium-server jar, and run the tests there.
+3) Replicate the grid using docker-containers
+4) Containerize the client system, which used to keep the source & test code, and will fire the test execution request to hub.
+5) Create a complete disposable environment, which include the client system.
+6) Create the complete environment in AWS.
+7) Automation all these tasks using Jenkins.
+
+
+
