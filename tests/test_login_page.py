@@ -13,14 +13,15 @@ from selenium import webdriver
 
 
 @pytest.fixture()
-def setup(browser):
+def setup(browser, hub_host):
     if browser.lower() == "chrome":
         # driver = Chrome(service=ChromeService(ChromeDriverManager().install()))\
         option = webdriver.ChromeOptions()
     else:
         # driver = Firefox(service=FfService(GeckoDriverManager().install()))
         option = webdriver.FirefoxOptions()
-    driver = WebDriver(command_executor="http://192.168.1.64:4444", keep_alive=False, options=option)
+    # driver = WebDriver(command_executor="http://192.168.1.64:4444", keep_alive=False, options=option)
+    driver = WebDriver(command_executor="http://{0}:4444".format(hub_host), keep_alive=False, options=option)
     yield driver
     driver.quit()
 

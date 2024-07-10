@@ -1,0 +1,11 @@
+
+services:
+  jenkins_master:
+    image: jenkins/jenkins:latest
+#    user: root
+    ports:
+      - 8080:8080
+      - 50000:50000
+    volumes:
+      - ./Jenkins_data/master:/var/jenkins_home
+

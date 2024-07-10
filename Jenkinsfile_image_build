@@ -11,7 +11,7 @@ stages{
               }
       stage("push_selenium_project_image"){
             environment {
-                DOCKER_HUB = credentials('Jenkins_docker_hub')
+                DOCKER_HUB = credentials('docker_cred')
             }
            steps{
                 sh "echo pushing image"

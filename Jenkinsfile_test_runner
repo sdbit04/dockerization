@@ -3,29 +3,26 @@ agent{
 label any
       }
 stages{
-      stage("create_selenium_project_image"){
+      stage("start Grid"){
            steps{
-                sh "docker build -t sdbit04/selenium_image ."
+                sh "docker-compose -f grid.yaml up --scale chrome=2 -d "
                  }
 
               }
-      stage("push_selenium_project_image"){
+      stage("Start Tests"){
             environment {
                 DOCKER_HUB = credentials('Jenkins_docker_hub')
             }
            steps{
-                sh "echo pushing image"
-                sh 'docker login -u ${DOCKER_HUB_USR} -p ${DOCKER_HUB_PSW}'
-                sh "docker push  sdbit04/selenium_image:latest"
-                sh "docker tag sdbit04/selenium_image:latest sdbit04/selenium_image:${env.BUILD_NUMBER}"
-                sh "docker push sdbit04/selenium_image:${env.BUILD_NUMBER}"
+                sh "docker-compose -f testSuit.aml up"
                  }
 
               }
        }
     post{
       always{
-       sh "docker logout"
+       sh "docker-compose -f grid.yaml down"
+       sh "docker-compose -f testSuit.yaml down"
        }
     }
 }

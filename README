@@ -9,3 +9,20 @@ a grid using selenium-server jar, and run the tests there.
 6) Create the complete environment in AWS.
 7) Automation all these tasks using Jenkins
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+152: Scale Browser & Run test
+
+ENTRYPOINT pytest -s -v tests/test_login_page.py -n ${THREADS_COUNT} --browser ${BROWSER} --hub_host ${HUB_HOST}
