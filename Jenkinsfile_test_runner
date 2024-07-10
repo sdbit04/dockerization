@@ -1,0 +1,32 @@
+pipeline{
+agent{
+label any
+      }
+stages{
+      stage("create_selenium_project_image"){
+           steps{
+                sh "docker build -t sdbit04/selenium_image ."
+                 }
+
+              }
+      stage("push_selenium_project_image"){
+            environment {
+                DOCKER_HUB = credentials('Jenkins_docker_hub')
+            }
+           steps{
+                sh "echo pushing image"
+                sh 'docker login -u ${DOCKER_HUB_USR} -p ${DOCKER_HUB_PSW}'
+                sh "docker push  sdbit04/selenium_image:latest"
+                sh "docker tag sdbit04/selenium_image:latest sdbit04/selenium_image:${env.BUILD_NUMBER}"
+                sh "docker push sdbit04/selenium_image:${env.BUILD_NUMBER}"
+                 }
+
+              }
+       }
+    post{
+      always{
+       sh "docker logout"
+       }
+    }
+}
+
