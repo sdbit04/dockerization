@@ -1,6 +1,6 @@
 pipeline{
 agent{
-label local_system
+label "local_system"
       }
 stages{
       stage("create_selenium_project_image"){
